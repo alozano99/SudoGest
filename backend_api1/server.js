@@ -1,18 +1,20 @@
 const express = require("express");
+const app = express();
 const mysql = require("mysql2");
 var cors = require("cors");
-const bodyParser = require("body-parser");
 const fs = require("fs");
 
 // Create the Express app
 const corsOptions = {
-  origin: ["http://localhost:3001", "http://sudogest.alozano.cat"],
+  origin: ["*"],
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 app.options("*", cors(corsOptions)); // Para preflight
 
 // Connexió a la BBDD
